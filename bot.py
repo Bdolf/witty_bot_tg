@@ -3,7 +3,9 @@
 import logging
 import os
 import random
-from telegram.ext import Updater, MessageHandler, Filters
+from telegram import Update
+from telegram.ext import Updater, MessageHandler, Filters, CallbackContext
+
 from dotenv import load_dotenv
 from responses import RESPONSES
 
@@ -15,7 +17,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 
 # Function to handle messages
-def handle_message(update, context):
+def handle_message(update: Update, context: CallbackContext) -> None:
     text = update.message.text.lower()
     response = None
 
@@ -37,10 +39,13 @@ def handle_message(update, context):
     if response:
         update.message.reply_text(response)
 
-
+# Error handling function
+def error(update: Update, context: CallbackContext) -> None:
+    """Log errors caused by updates."""
+    logger.warning(f'Update {update} caused error {context.error}')
 
 # Main function to start the bot
-def main():
+def main() -> None:
     # Get the bot token from the environment variable
     bot_token = os.getenv('TG_BOT_TOKEN')
     if not bot_token:
@@ -54,6 +59,9 @@ def main():
 
     # Handle all text messages
     dp.add_handler(MessageHandler(Filters.text, handle_message))
+
+    # Register the error handler
+    dp.add_error_handler(error)
 
     # Start the bot
     updater.start_polling()
