@@ -24,15 +24,19 @@ def handle_message(update, context):
         update.message.reply_text("Don't @ me, bitch")
         return
 
-    # Existing logic for handling trigger words
+    # Check for variations of the trigger words
     for word in text.split():
-        if word in RESPONSES:
-            response = random.choice(RESPONSES[word])
+        for trigger in RESPONSES:
+            if word.startswith(trigger):
+                response = random.choice(RESPONSES[trigger])
+                break
+        if response:
             break
 
-    # Send a reply if a trigger word is found or a default response
+    # Send a reply if a trigger word or variation is found
     if response:
         update.message.reply_text(response)
+
 
 
 # Main function to start the bot
