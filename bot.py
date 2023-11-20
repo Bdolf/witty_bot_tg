@@ -17,27 +17,44 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 
 # Function to handle messages
+# Global dictionary to track counts for each trigger word
+TRIGGER_COUNTS = {trigger: 0 for trigger in RESPONSES}
+
 def handle_message(update: Update, context: CallbackContext) -> None:
     text = update.message.text.lower()
     response = None
 
     # Check if the message is a reply to the bot
     if update.message.reply_to_message and update.message.reply_to_message.from_user.id == context.bot.id:
-        update.message.reply_text("Don't @ me, bitch")
+        witty_responses = [
+            "I'm flattered, but let's not make this a habit.",
+            "Alert! User interaction overload. Please try again later.",
+            "Beep boop! Your attention is noted, but not needed.",
+            "I see you're a fan. Autographs later, please.",
+            "Trying to get my attention? Join the queue!"
+        ]
+        update.message.reply_text(random.choice(witty_responses))
         return
 
-    # Check for variations of the trigger words
+    # The rest of the function remains unchanged...
+
+
+    # Check for variations of the trigger words and update counts
     for word in text.split():
         for trigger in RESPONSES:
             if word.startswith(trigger):
-                response = random.choice(RESPONSES[trigger])
+                TRIGGER_COUNTS[trigger] += 1
+                if TRIGGER_COUNTS[trigger] >= 20:
+                    response = random.choice(RESPONSES[trigger])
+                    TRIGGER_COUNTS[trigger] = 0  # Reset the count
                 break
         if response:
             break
 
-    # Send a reply if a trigger word or variation is found
+    # Send a reply if a trigger word or variation is found and count is 20
     if response:
         update.message.reply_text(response)
+
 
 # Error handling function
 def error(update: Update, context: CallbackContext) -> None:
