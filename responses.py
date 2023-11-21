@@ -154,6 +154,28 @@ RESPONSES = {
         'Positive change starts with how we communicate with each other.',
         'A little empathy in our choice of words can go a long way.',
         'Let\'s avoid language that demeans or disrespects others.'
-    ]
+    ],
+    'shit': [
+        'Oh, Weenie, gracing us with another... "natural masterpiece"? Your gallery is growing.',
+        'Weenie\'s at it again with his unique brand of... "art". Should we expect a gallery opening soon?',
+        'Another day, another "gift" from Weenie. You\'re really... outdoing yourself.',
+        'Weenie, your dedication to sharing these... "special moments" is truly... something.',
+        'Is that a new one, Weenie? Your... "talent" for this is really... something else.',
+        'Weenie, with each... "creation"... you\'re really... pushing the envelope.',
+        'Back with another showstopper, Weenie? Your... "collection" is becoming infamous.',
+        'Weenie, is this your latest... "exhibit"? It\'s... impressively consistent.',
+        'Ah, Weenie, yet another... "presentation". Your consistency is... remarkable.',
+        'Every day is a surprise with you, Weenie. What... "delights" will you share next?',
+        'Weenie, your... "contributions" never cease to... amaze?... us.',
+        'And here we have Weenie\'s latest... "offering". It\'s... something, alright.',
+        'Weenie, is this today\'s... "surprise"? You\'re full of... surprises.',
+        'Weenie, with each... "masterpiece"... you\'re really... carving out your niche.',
+        'Ah, a new... "creation" from Weenie. You\'re really... dedicated to your craft.',
+        'Weenie, is this your latest... "work"? You\'re... outdoing yourself, as always.',
+        'Back at it, Weenie? Your... "artistic streak" is... hard to miss.',
+        'Weenie, with this latest... "gem"... you\'re really... making a statement.',
+        'Oh, a new... "piece" from Weenie. Your... "talent" knows no bounds.',
+        'Here\'s another... "classic" from Weenie. It\'s... consistent, I\'ll give you that.'
+    ],
     # Add more trigger words and responses here
 }
