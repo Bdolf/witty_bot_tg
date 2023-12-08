@@ -1,4 +1,4 @@
-#!/home/brodolf/Desktop/Grugger_tg_bot/grug/bin/python3
+#!/home/brodolf/Desktop/grug_bot/grug/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

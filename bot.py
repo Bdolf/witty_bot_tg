@@ -1,5 +1,3 @@
-# bot.py
-
 import logging
 import os
 import random
@@ -7,7 +5,7 @@ from telegram import Update
 from telegram.ext import Updater, MessageHandler, Filters, CallbackContext
 
 from dotenv import load_dotenv
-from responses import RESPONSES
+from responses import RESPONSES, BOT_REPLY_RESPONSES  # Import BOT_REPLY_RESPONSES
 
 load_dotenv()
 
@@ -16,7 +14,6 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
                     level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Function to handle messages
 # Global dictionary to track counts for each trigger word
 TRIGGER_COUNTS = {trigger: 0 for trigger in RESPONSES}
 
@@ -26,18 +23,8 @@ def handle_message(update: Update, context: CallbackContext) -> None:
 
     # Check if the message is a reply to the bot
     if update.message.reply_to_message and update.message.reply_to_message.from_user.id == context.bot.id:
-        witty_responses = [
-            "I'm flattered, but let's not make this a habit.",
-            "Alert! User interaction overload. Please try again later.",
-            "Beep boop! Your attention is noted, but not needed.",
-            "I see you're a fan. Autographs later, please.",
-            "Trying to get my attention? Join the queue!"
-        ]
-        update.message.reply_text(random.choice(witty_responses))
+        update.message.reply_text(random.choice(BOT_REPLY_RESPONSES))  # Use BOT_REPLY_RESPONSES
         return
-
-    # The rest of the function remains unchanged...
-
 
     # Check for variations of the trigger words and update counts
     for word in text.split():
@@ -55,13 +42,10 @@ def handle_message(update: Update, context: CallbackContext) -> None:
     if response:
         update.message.reply_text(response)
 
-
-# Error handling function
 def error(update: Update, context: CallbackContext) -> None:
     """Log errors caused by updates."""
     logger.warning(f'Update {update} caused error {context.error}')
 
-# Main function to start the bot
 def main() -> None:
     # Get the bot token from the environment variable
     bot_token = os.getenv('TG_BOT_TOKEN')
